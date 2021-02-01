@@ -1,0 +1,5 @@
+- name: restart nfs
+  systemd:
+    state: restarted
+    name: nfs-server
+    enabled: yes

@@ -1,0 +1,19 @@
+---
+- name: Install nfs-server
+  yum:
+   name:
+     - nfs-utils
+- name: Create nfs directory
+  file:
+    path: "{{ item.path }}"
+    state: directory
+  loop:
+   - {path: "{{ shared_dir[0] }}"}
+   - {path: "{{ shared_dir[1] }}"}
+- name: Copy nfs template
+  template:
+   src: "exports.j2"
+   dest: "/etc/exports"
+- name: apply nfs configuration
+  shell: exportfs -a
+  notify: restart nfs

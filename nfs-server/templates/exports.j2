@@ -1,0 +1,3 @@
+{% for dir in shared_dir %}
+{{ dir }} {{ network }}(rw,subtree_check,insecure,no_root_squash)
+{% endfor %}
